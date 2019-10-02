@@ -1,1 +1,2 @@
-Sitemap: https://joel-murphy.co.uk/sitemap.xml
+User-agent: *
+Disallow: /
