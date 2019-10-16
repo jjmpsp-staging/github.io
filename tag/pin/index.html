@@ -24,7 +24,7 @@
 
     <title>
         
-            Tag &middot; Joel Murphy
+            Posts tagged with pin &middot; Joel Murphy
         
     </title>
 
@@ -51,7 +51,7 @@
 
     <meta content="Joel Murphy" property="og:site_name">
 
-<meta content="Tag" property="og:title">
+<meta content="Posts tagged with pin" property="og:title">
 
 
 
@@ -59,15 +59,11 @@
 
 
 
-<meta content="{{ site.tags | jsonify }}
-
-{% for tag in site.tags %}
-  {{ tag }}
-{% endfor %}" property="og:description">
+<meta content="" property="og:description">
 
 
 
-<meta content="https://staging.joel-murphy.co.uk/tag" property="og:url">
+<meta content="https://staging.joel-murphy.co.uk/tag/pin/index.html" property="og:url">
 
 
 
@@ -344,9 +340,44 @@
         <article class="col-lg-8 col-xl-8 col-md-8 col-sm-8 col-xs-12 pb-4 order-sm-last content" id="content">
             <div class="card bg-white">
                 <div class="card-body">
-                    <p>{}</p>
+                    <!-- Just some nice to have styles for the pager buttons -->
+<style>
+    ul.pager { text-align: center; list-style: none; }
+    ul.pager li {display: inline;border: 1px solid black; padding: 10px; margin: 5px;}
+</style>
+
+<div class="home">
+
+    <h1 class="page-heading">AutoPage for Tag <b>pin</b> Page 1 of 1</h1>
+
+    This page is automagically created and paginated for each tag available in the posts on this site
+
+    
 
 
+    <ul class="post-list">
+        <!--
+            Here is the main paginator logic called.
+            All calls to site.posts should be replaced by paginator.posts
+        -->
+        
+        <li>
+            <span class="post-meta">May 5, 2019 | blogposts<br>Tags: windowspintaskbarpowershell</span>
+            <h2>
+                <a class="post-link" href="/blogposts/2019-5-5-windows-10-powershell-copy-app-to-taskbar.html">How to pin programs to taskbar with powershell in Windows 10 or Windows Server 2012+</a>
+            </h2>
+        </li>
+        
+    </ul>
+
+    <!--
+      Showing buttons to move to the next and to the previous list of posts (pager buttons).
+    -->
+    
+
+    <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+
+</div>
                 </div>
             </div>
         </article>
@@ -607,6 +638,9 @@
                             </li>
                             <li>
                                 <a href="/cookie-policy.html">Cookie Policy</a>
+                            </li>
+                            <li>
+                                <a href="/sitemap/">Sitemap</a>
                             </li>
                             <li>
                                 <a href="https://trello.com/b/6MTwpOKh/joel-murphy-website-project-management-board"
