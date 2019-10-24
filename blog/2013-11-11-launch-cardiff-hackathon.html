@@ -24,7 +24,7 @@
 
     <title>
         
-            MySQL to MS SQL Database Migration (without SSMA) &middot; Joel Murphy
+            Launch 48 Cardiff - event summary &middot; Joel Murphy
         
     </title>
 
@@ -51,7 +51,7 @@
 
     <meta content="Joel Murphy" property="og:site_name">
 
-<meta content="MySQL to MS SQL Database Migration (without SSMA)" property="og:title">
+<meta content="Launch 48 Cardiff - event summary" property="og:title">
 
 
 
@@ -63,11 +63,11 @@
 
 
 
-<meta content="https://staging.joel-murphy.co.uk/blogposts/2018-03-10-mysql-to-mssql-database-migration.html" property="og:url">
+<meta content="https://staging.joel-murphy.co.uk/blog/2013-11-11-launch-cardiff-hackathon.html" property="og:url">
 
 
 
-<meta content="2018-03-10T00:00:00+00:00" property="article:published_time">
+<meta content="2013-11-11T00:00:00+00:00" property="article:published_time">
 <meta content="https://staging.joel-murphy.co.uk/about/" property="article:author">
 
 
@@ -81,15 +81,11 @@
 
 
 
-<meta content="database" property="article:tag">
+<meta content="jekyll" property="article:tag">
 
-<meta content="migration" property="article:tag">
+<meta content="collections" property="article:tag">
 
-<meta content="mysql" property="article:tag">
-
-<meta content="mssql" property="article:tag">
-
-<meta content="php" property="article:tag">
+<meta content="liquid" property="article:tag">
 
 
 </head>
@@ -360,7 +356,7 @@
                     <div class="d-flex align-items-center border border-left-0 border-right-0 py-2 mb-3">
     <div style="flex:1;flex-basis: 80%;">
         <h1 class="list-title">
-            MySQL to MS SQL Database Migration (without SSMA)
+            Launch 48 Cardiff - event summary
         </h1>
     </div>
 
@@ -413,7 +409,7 @@
     
     
     <li class="breadcrumb-item active">
-        <a href="/blogposts/2018-03-10-mysql-to-mssql-database-migration.html">MySQL to MS SQL Database Migration (without SSMA)</a>
+        <a href="/blog/2013-11-11-launch-cardiff-hackathon.html">Launch 48 Cardiff - event summary</a>
     </li>
 </nav>
 
@@ -427,53 +423,57 @@
         <i class="fas fa-clock fa-xs" style="color: #553e98;"></i>
         
         
-        2 minutes
+        3 minutes
         
         read
     </span>
     </div>
     <div class="crumb-item">
-        <span><i class="fas fa-calendar fa-xs" style="color: #553e98;"></i> <date>10 Mar 2018</date></span>
+        <span><i class="fas fa-calendar fa-xs" style="color: #553e98;"></i> <date>11 Nov 2013</date></span>
     </div>
 </aside>
 
 
 <hr>
 
-<p>This post describes methods you can use to migrate a MySQL database to MSSQL (Microsoft SQL) with the least amount of effort</p>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Archived Post:</strong> This post has been marked as 'archived' and only exists for historical purposes. As a result of this, some information in this post may be outdated or no longer supported.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<p><img src="http://localhost:81/wordpress/wp-content/uploads/2014/01/launch48.jpg" class="img-fluid" alt="launch48" /></p>
+
+<p>Back in October 2013, I took part in an event called Launch48 with my good friends <a href="http://sidengo.com/mrhysjones">Matthew Jones</a>,&nbsp;Nathan Ahmad<a id="js_28" href="https://www.facebook.com/nathan.ahmad" data-hovercard="/ajax/hovercard/user.php?id=545126489"></a>&nbsp;and <a href="http://luke-berry.co.uk/">Luke Berry</a>.</p>
+<p>The aim of the event was simple: Work with strangers that you’ve never met before for 48 hours straight to build a startup that’s going to make millions (umm yeah).</p>
 
 <!--more-->
 
-<p>If you’re in a situation where you need to migrate a mysql database to a mssql database then</p>
+<p>As stressful as the event may sound, it was actually pretty fun.&nbsp;Although the actual time working on stuff was probably about 20 hours when we included going home and eating within the time that we had – this made it even more of a manic weekend.</p>
+<p>The idea that I worked on was called WannaBeASpaceman? and was pitched by&nbsp;<a href="http://amieduggan.com/">Amie</a>.</p>
+<p>To sum up&nbsp;WannaBeASpaceman in a short sentence:</p>
+<blockquote><p>WannaBeASpaceman is a&nbsp;library of short videos for children who need help to answer the question: "What do you want to be when you grow up?"</p></blockquote>
+<p>After many beers, waters and slices of pizza we came up with a working prototype, a business plan, as well as a pitch&nbsp;of what WannaBeASpaceman was going to be (all in under 48 hours!)</p>
+<p>You can see our final result <a href="http://beaspaceman.herokuapp.com/">here</a>&nbsp;which is kindly hosted by <a href="https://www.heroku.com/">Heroku</a>.</p>
+<p>Unfortunately WannaBeASpaceMan didn’t take off (no pun intended) beyond the Launch48 event&nbsp;to make us all millionaires, but it was still a great weekend.</p>
 
-<p>If you’re looking for the reverse of this process (MSSQL to MySQL) then you should probably be using SSMA as this is Microsoft’s own tool for performing this operation.</p>
-
-<p>Your first thought would be to to configure a MySQL install on the secondary box but the setup isn’t quite as simple as this.</p>
-
-<p>SSMA does NOT support Database migrations to Microsoft Server 2008. Why? Because the tool was written when MSSQL Server 2008 was already deprecated.</p>
-
-<p>There are a few things you have to keep in mind with database backup and restore software:</p>
-<ol>
-  <li>The progress indicators are pretty dire. Some softwares do have progress reporting built in, but unless you’re running on a Unix operating system you won’t have access to pipes for reporting total file size.</li>
-  <li>Restores can fail for a number of reasons. If you already have data inside a database then there’s a possibility that you may be trying to reinsert data that violates a unique key (e.g an ID or a Username)</li>
-</ol>
-
-<p>To add even more complexity to the situation, you then have to consider that there are different flavours of SQL syntax used across different installations. E.g. MySQL uses Oracle SQL and Microsoft SQL uses T-SQL syntax.
-This means the migration isn’t a direct 1:1 mapping and you’ll need to make some changes to the syntax before attempting to restore data to another database.</p>
-
-<p>What does a migration actually involve?
-Before completing a migration from one Database Engine to another (in this case MySQL to MSSQL) it’s important to understand the process that should be carried out.</p>
-
-<p>Understanding why a database migration needs to be performed:
-You may be wondering why</p>
-
+<p>Wanna be a Spaceman was born out of an original blog post ‘No-one ever told me I could be a spaceman’ - after a lifetime of poor career guidance she vowed to create a curated library of professionally produced videos which would give a realistic insight into a variety of industries.
+The opportunity to turn an idea into reality didn’t present itself until an event in October 2013. Launch 48 (www.launch48.com/cardiffweekend) brought together an eclectic mix of folk from various industries including web development, marketing, business and education.
+Over a period of 48 hours, hardly any sleep and a lot of coffee, a team of nine people filmed a load of great people talking about their jobs, built an extensive backend database which allowed people to search the site, designed a beautiful website and got a social media presence.
+The result was a social enterprise called ‘Wanna be a Spaceman’ - the principle behind the site is not to try and solve every problem that exists in the world of careers advice, but rather to do one thing well. Beautiful, simple &amp; inspiring videos which will help to inspire, direct and give choice to anyone who needs some careers guidance.
+Search. Watch. Be inspired.
+Our core values
+A commitment to inspire and give choice to those who need career guidance.
+A determination to ensure user privacy by not collecting any identifiable data.
+A pledge to undertake business practices in an ethical manner and never, ever to be evil.</p>
 
 
 <div class="space-before" style="z-index: 0 !important;margin-top:10px;">
     <div class="card bg-white mb-3">
         <div class="card-body">
             <div class="card-title">
-                Posted on <date>10 Mar 2018</date> by Joel Murphy. Last updated: <date>September 08, 2019</date>.
+                Posted on <date>11 Nov 2013</date> by Joel Murphy. Last updated: <date>October 24, 2019</date>.
             </div>
             <div class="d-flex flex-wrap align-items-center">
                 <span class="icon grey mr-2 mb-2">
@@ -493,29 +493,19 @@ You may be wondering why</p>
 
                 </span>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/database/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/jekyll/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        database
+                        jekyll
                     </a>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/migration/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/collections/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        migration
+                        collections
                     </a>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/mysql/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/liquid/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        mysql
-                    </a>
-                
-                    <a href="https://staging.joel-murphy.co.uk/tag/mssql/"
-                       class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        mssql
-                    </a>
-                
-                    <a href="https://staging.joel-murphy.co.uk/tag/php/"
-                       class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        php
+                        liquid
                     </a>
                 
             </div>
@@ -526,10 +516,8 @@ You may be wondering why</p>
 
 <div class="PageNavigation">
     
-    <a class="prev" href="/blogposts/2018-03-10-looping-over-all-collections-in-jekyll.html">&laquo; How to loop over any collection type in Jekyll</a>
     
-    
-    <a class="next" href="/blogposts/2018-03-10-scaling-how-the-tech-giants-do-it.html">How do tech giants scale to millions or billions of users? &raquo;</a>
+    <a class="next" href="/blog/2013-11-12-young-rewired-state-growify-team.html">Young Rewired State 2013 - Team Growify &raquo;</a>
     
 </div>
 
@@ -541,7 +529,7 @@ You may be wondering why</p>
             <h3>Table of Contents:</h3>
             
             <ul>
-  <li><a href="#">MySQL to MS SQL Database Migration (without SSMA)</a></li>
+  <li><a href="#">Launch 48 Cardiff - event summary</a></li>
 </ul>
         
 
@@ -566,43 +554,43 @@ You may be wondering why</p>
     <h4>Share this Blog Post:</h4>
 
     <div class="share-buttons">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://staging.joel-murphy.co.uk/blogposts/2018-03-10-mysql-to-mssql-database-migration.html"
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://staging.joel-murphy.co.uk/blog/2013-11-11-launch-cardiff-hackathon.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button facebook"
            title="Share on Facebook">
             <i class="fab fa-facebook"> </i> facebook
         </a>
-        <a href="https://twitter.com/intent/tweet?text=MySQL to MS SQL Database Migration (without SSMA)&url=https://staging.joel-murphy.co.uk/blogposts/2018-03-10-mysql-to-mssql-database-migration.html"
+        <a href="https://twitter.com/intent/tweet?text=Launch 48 Cardiff - event summary&url=https://staging.joel-murphy.co.uk/blog/2013-11-11-launch-cardiff-hackathon.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button twitter"
            title="Share on Twitter">
             <i class="fab fa-twitter"> </i> twitter
         </a>
-        <a href="https://www.pinterest.com/pin/create/button/?url=https://staging.joel-murphy.co.uk/blogposts/2018-03-10-mysql-to-mssql-database-migration.html"
+        <a href="https://www.pinterest.com/pin/create/button/?url=https://staging.joel-murphy.co.uk/blog/2013-11-11-launch-cardiff-hackathon.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button pinterest"
            title="Share on Pinterest">
             <i class="fab fa-pinterest-p"> </i> pinterest
         </a>
-        <a href="https://www.tumblr.com/share/link?url=https://staging.joel-murphy.co.uk/blogposts/2018-03-10-mysql-to-mssql-database-migration.html"
+        <a href="https://www.tumblr.com/share/link?url=https://staging.joel-murphy.co.uk/blog/2013-11-11-launch-cardiff-hackathon.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button tumblr"
            title="Share on Tumblr">
             <i class="fab fa-tumblr"> </i> tumblr
         </a>
-        <a href="http://www.reddit.com/submit?url=https://staging.joel-murphy.co.uk/blogposts/2018-03-10-mysql-to-mssql-database-migration.html"
+        <a href="http://www.reddit.com/submit?url=https://staging.joel-murphy.co.uk/blog/2013-11-11-launch-cardiff-hackathon.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button reddit"
            title="Share on Reddit">
             <i class="fab fa-reddit"> </i> reddit
         </a>
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://staging.joel-murphy.co.uk/blogposts/2018-03-10-mysql-to-mssql-database-migration.html&title=MySQL to MS SQL Database Migration (without SSMA)&summary=Sample code demonstrating how to loop over any collection type in Jekyll&source=Joel Murphy"
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://staging.joel-murphy.co.uk/blog/2013-11-11-launch-cardiff-hackathon.html&title=Launch 48 Cardiff - event summary&summary=Sample code demonstrating how to loop over any collection type in Jekyll&source=Joel Murphy"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button linkedin"
            title="Share on LinkedIn">
             <i class="fab fa-linkedin"> </i> linkedin
         </a>
-        <a href="mailto:?subject=MySQL to MS SQL Database Migration (without SSMA)&amp;body=Check%20out%20this%20site:%20https://staging.joel-murphy.co.uk/blogposts/2018-03-10-mysql-to-mssql-database-migration.html"
+        <a href="mailto:?subject=Launch 48 Cardiff - event summary&amp;body=Check%20out%20this%20site:%20https://staging.joel-murphy.co.uk/blog/2013-11-11-launch-cardiff-hackathon.html"
            class="share-button email"
            title="Share via Email">
             <i class="far fa-envelope"> </i> email
@@ -612,7 +600,7 @@ You may be wondering why</p>
 
 <hr>
 
-<h4 class="comment-heading">Share your thoughts on: 'MySQL to MS SQL Database Migration (without SSMA)':</h4>
+<h4 class="comment-heading">Share your thoughts on: 'Launch 48 Cardiff - event summary':</h4>
 
 
 <div id="disqus_thread"></div>
@@ -639,19 +627,19 @@ You may be wondering why</p>
                 <p>There's plenty more content to explore:</p>
                 <ul class="list-inline">
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Blog Posts</a>
+                        <a href="/blog/">Blog Posts</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Tutorials</a>
+                        <a href="/tutorials/">Tutorials</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Portfolio Items</a>
+                        <a href="/portfolio/">Portfolio Items</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Money Saving Guides</a>
+                        <a href="/money-saving/">Money Saving Guides</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Product Reviews</a>
+                        <a href="/product-reviews/">Product Reviews</a>
                     </li>
                 </ul>
             </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Technology topics worth learning in 2019">
+    <meta name="description" content="">
     <meta name="author" content="Joel Murphy">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png"/>
@@ -24,7 +24,7 @@
 
     <title>
         
-            Technology topics worth learning in 2019 &middot; Joel Murphy
+            Why I ditched wordpress for Jekyll &middot; Joel Murphy
         
     </title>
 
@@ -51,7 +51,7 @@
 
     <meta content="Joel Murphy" property="og:site_name">
 
-<meta content="Technology topics worth learning in 2019" property="og:title">
+<meta content="Why I ditched wordpress for Jekyll" property="og:title">
 
 
 
@@ -59,15 +59,15 @@
 
 
 
-<meta content="Technology topics worth learning in 2019" property="og:description">
+<meta content="If you’ve been thinking of moving away from Wordpress and using a static website generator site then this is probably the post for you… In this post I will discuss my reasons for migrating my old Wordpress website to Jekyll. Wordpress is so stupidly bloated. I used to be a wordpress developer myself, but sometimes I asked myself ‘why’. Wordpress and it’s huge plugin system can be a handle to maintain. Don’t get me wrong,..." property="og:description">
 
 
 
-<meta content="https://staging.joel-murphy.co.uk/blogposts/2019-05-10-technology-topics-with-learning-in-2019.html" property="og:url">
+<meta content="https://staging.joel-murphy.co.uk/blog/2018-05-10-why-i-ditched-wordpress-for-jekyll.html" property="og:url">
 
 
 
-<meta content="2019-05-10T00:00:00+00:00" property="article:published_time">
+<meta content="2018-05-10T00:00:00+00:00" property="article:published_time">
 <meta content="https://staging.joel-murphy.co.uk/about/" property="article:author">
 
 
@@ -81,9 +81,13 @@
 
 
 
-<meta content="technology" property="article:tag">
+<meta content="jekyll" property="article:tag">
 
-<meta content="learning" property="article:tag">
+<meta content="wordpress" property="article:tag">
+
+<meta content="migration" property="article:tag">
+
+<meta content="cms" property="article:tag">
 
 
 </head>
@@ -354,7 +358,7 @@
                     <div class="d-flex align-items-center border border-left-0 border-right-0 py-2 mb-3">
     <div style="flex:1;flex-basis: 80%;">
         <h1 class="list-title">
-            Technology topics worth learning in 2019
+            Why I ditched wordpress for Jekyll
         </h1>
     </div>
 
@@ -407,7 +411,7 @@
     
     
     <li class="breadcrumb-item active">
-        <a href="/blogposts/2019-05-10-technology-topics-with-learning-in-2019.html">Technology topics worth learning in 2019</a>
+        <a href="/blog/2018-05-10-why-i-ditched-wordpress-for-jekyll.html">Why I ditched wordpress for Jekyll</a>
     </li>
 </nav>
 
@@ -421,42 +425,69 @@
         <i class="fas fa-clock fa-xs" style="color: #553e98;"></i>
         
         
-        1 minute
+        3 minutes
         
         read
     </span>
     </div>
     <div class="crumb-item">
-        <span><i class="fas fa-calendar fa-xs" style="color: #553e98;"></i> <date>10 May 2019</date></span>
+        <span><i class="fas fa-calendar fa-xs" style="color: #553e98;"></i> <date>10 May 2018</date></span>
     </div>
 </aside>
 
 
 <hr>
 
-<p>From cost management, licensing, support,</p>
-
-<p>Finding a technology to master is hard and one of the biggest mistakes you can make as an I.T professional is being tied to working with the wrong technologies!</p>
-
-<p>Here are some of the greatest developments in the industry.</p>
-
-<p>DotNet Core
-React &amp; React Native
-Azure</p>
-
-<p>Looking at <a href="https://trends.google.com/trends/">Google Trends</a></p>
-
-<p>Azure platform
-This is one of Microsoft’s greatest inventions since Hyper-V!</p>
+<p>If you’ve been thinking of moving away from Wordpress and using a static website generator site then this is probably the post for you… In this post I will discuss my reasons for migrating my old Wordpress website to Jekyll.</p>
 
 <!--more-->
+
+<p>Wordpress is so stupidly bloated.
+I used to be a wordpress developer myself, but sometimes I asked myself ‘why’.</p>
+
+<p>Wordpress and it’s huge plugin system can be a handle to maintain. Don’t get me wrong, it’s amazing that there are so many plugins actively developed for Wordpress but w</p>
+
+<p>Sometimes websites can have in excess of 10, 20, 50, to 100+ plugins installed. All it takes is for one of those plugins to have one single security vulnrebility and this is enough to comepletely take down your website. Some wordpress security vulnerabilities can go unseen for months, or even years. What if a plugin developer decides to abandon their masterpiece of a plugin if they’ve taken on other projects? You’re pretty much screwed and the only option you’re left with is to fork and maintain a version of the plugin yourself, or use an alternative plugin. The issues with this is it can take up a lot of time</p>
+
+<!--more-->
+
+<p>Now my website is completely managed with git. This is absolutely fantastic. In a matter of minutes and from pretty much any device I can make changes to my website and github pages will automatically deploy those changes for me when pushed to a specificied branch. How cool this this?</p>
+
+<p>Just like any other page on the internet, HTML is used to write the structure and content of webpages. However, Jekyll has support for rendering content using Markdwon. This is a nice little extra as it allows you to do things such as writing lists much faster than before. E.g. why write 20 lines of HTML when you can achieve the same thing in 4?</p>
+
+<ul>
+  <li>Point 1</li>
+  <li>Point 2</li>
+  <li>Point 3</li>
+</ul>
+
+<ul>
+    <li>
+        Point 1
+    </li>
+    <li>
+        Point 2
+    </li>
+    <li>
+        Point 3
+    </li>
+</ul>
+
+<p>What’s even cooler about markdown is that it can be combined with HTML in Jekyll so you have the best of both worlds for typing up webpage markup and content.</p>
+
+<p>You can customise a lot more than you think, just by using pre-html renderers and configuration defined in a YAML file.</p>
+
+<p>Static websites are a lot faster</p>
+
+<p>There’s no need for maintaining a database
+This point kind of goes hand-in-hand as being a positive and a negative when developing websites. Managing a database has become pretty easy nowadays thanks to the numerous amount of backup scripts and dozens of storage providers available to us. But why even bother managing a database unless you have to? By having a static website you can focus</p>
 
 
 <div class="space-before" style="z-index: 0 !important;margin-top:10px;">
     <div class="card bg-white mb-3">
         <div class="card-body">
             <div class="card-title">
-                Posted on <date>10 May 2019</date> by Joel Murphy. Last updated: <date>September 24, 2019</date>.
+                Posted on <date>10 May 2018</date> by Joel Murphy. Last updated: <date>September 30, 2019</date>.
             </div>
             <div class="d-flex flex-wrap align-items-center">
                 <span class="icon grey mr-2 mb-2">
@@ -476,14 +507,24 @@ This is one of Microsoft’s greatest inventions since Hyper-V!</p>
 
                 </span>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/technology/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/jekyll/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        technology
+                        jekyll
                     </a>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/learning/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/wordpress/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        learning
+                        wordpress
+                    </a>
+                
+                    <a href="https://staging.joel-murphy.co.uk/tag/migration/"
+                       class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
+                        migration
+                    </a>
+                
+                    <a href="https://staging.joel-murphy.co.uk/tag/cms/"
+                       class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
+                        cms
                     </a>
                 
             </div>
@@ -494,10 +535,10 @@ This is one of Microsoft’s greatest inventions since Hyper-V!</p>
 
 <div class="PageNavigation">
     
-    <a class="prev" href="/blogposts/2019-5-5-windows-10-powershell-copy-app-to-taskbar.html">&laquo; How to pin programs to taskbar with powershell in Windows 10 or Windows Server 2012+</a>
+    <a class="prev" href="/blog/2018-05-10-three-years-of-computer-science-summary.html">&laquo; Three years of computer science in a day</a>
     
     
-    <a class="next" href="/blogposts/2019-07-07-download-google-chrome-without-internet.html">Downloading Google Chrome for a remote machine without internet access &raquo;</a>
+    <a class="next" href="/blog/2018-10-10-understanding-the-core-concepts-of-kubernetes.html">Understanding the core concepts of Kubernetes &raquo;</a>
     
 </div>
 
@@ -509,7 +550,7 @@ This is one of Microsoft’s greatest inventions since Hyper-V!</p>
             <h3>Table of Contents:</h3>
             
             <ul>
-  <li><a href="#">Technology topics worth learning in 2019</a></li>
+  <li><a href="#">Why I ditched wordpress for Jekyll</a></li>
 </ul>
         
 
@@ -534,43 +575,43 @@ This is one of Microsoft’s greatest inventions since Hyper-V!</p>
     <h4>Share this Blog Post:</h4>
 
     <div class="share-buttons">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://staging.joel-murphy.co.uk/blogposts/2019-05-10-technology-topics-with-learning-in-2019.html"
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://staging.joel-murphy.co.uk/blog/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button facebook"
            title="Share on Facebook">
             <i class="fab fa-facebook"> </i> facebook
         </a>
-        <a href="https://twitter.com/intent/tweet?text=Technology topics worth learning in 2019&url=https://staging.joel-murphy.co.uk/blogposts/2019-05-10-technology-topics-with-learning-in-2019.html"
+        <a href="https://twitter.com/intent/tweet?text=Why I ditched wordpress for Jekyll&url=https://staging.joel-murphy.co.uk/blog/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button twitter"
            title="Share on Twitter">
             <i class="fab fa-twitter"> </i> twitter
         </a>
-        <a href="https://www.pinterest.com/pin/create/button/?url=https://staging.joel-murphy.co.uk/blogposts/2019-05-10-technology-topics-with-learning-in-2019.html"
+        <a href="https://www.pinterest.com/pin/create/button/?url=https://staging.joel-murphy.co.uk/blog/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button pinterest"
            title="Share on Pinterest">
             <i class="fab fa-pinterest-p"> </i> pinterest
         </a>
-        <a href="https://www.tumblr.com/share/link?url=https://staging.joel-murphy.co.uk/blogposts/2019-05-10-technology-topics-with-learning-in-2019.html"
+        <a href="https://www.tumblr.com/share/link?url=https://staging.joel-murphy.co.uk/blog/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button tumblr"
            title="Share on Tumblr">
             <i class="fab fa-tumblr"> </i> tumblr
         </a>
-        <a href="http://www.reddit.com/submit?url=https://staging.joel-murphy.co.uk/blogposts/2019-05-10-technology-topics-with-learning-in-2019.html"
+        <a href="http://www.reddit.com/submit?url=https://staging.joel-murphy.co.uk/blog/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button reddit"
            title="Share on Reddit">
             <i class="fab fa-reddit"> </i> reddit
         </a>
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://staging.joel-murphy.co.uk/blogposts/2019-05-10-technology-topics-with-learning-in-2019.html&title=Technology topics worth learning in 2019&summary=Technology topics worth learning in 2019&source=Joel Murphy"
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://staging.joel-murphy.co.uk/blog/2018-05-10-why-i-ditched-wordpress-for-jekyll.html&title=Why I ditched wordpress for Jekyll&summary=&source=Joel Murphy"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button linkedin"
            title="Share on LinkedIn">
             <i class="fab fa-linkedin"> </i> linkedin
         </a>
-        <a href="mailto:?subject=Technology topics worth learning in 2019&amp;body=Check%20out%20this%20site:%20https://staging.joel-murphy.co.uk/blogposts/2019-05-10-technology-topics-with-learning-in-2019.html"
+        <a href="mailto:?subject=Why I ditched wordpress for Jekyll&amp;body=Check%20out%20this%20site:%20https://staging.joel-murphy.co.uk/blog/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
            class="share-button email"
            title="Share via Email">
             <i class="far fa-envelope"> </i> email
@@ -580,7 +621,7 @@ This is one of Microsoft’s greatest inventions since Hyper-V!</p>
 
 <hr>
 
-<h4 class="comment-heading">Share your thoughts on: 'Technology topics worth learning in 2019':</h4>
+<h4 class="comment-heading">Share your thoughts on: 'Why I ditched wordpress for Jekyll':</h4>
 
 
 <div id="disqus_thread"></div>
@@ -607,19 +648,19 @@ This is one of Microsoft’s greatest inventions since Hyper-V!</p>
                 <p>There's plenty more content to explore:</p>
                 <ul class="list-inline">
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Blog Posts</a>
+                        <a href="/blog/">Blog Posts</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Tutorials</a>
+                        <a href="/tutorials/">Tutorials</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Portfolio Items</a>
+                        <a href="/portfolio/">Portfolio Items</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Money Saving Guides</a>
+                        <a href="/money-saving/">Money Saving Guides</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Product Reviews</a>
+                        <a href="/product-reviews/">Product Reviews</a>
                     </li>
                 </ul>
             </div>

@@ -24,7 +24,7 @@
 
     <title>
         
-            Why I ditched wordpress for Jekyll &middot; Joel Murphy
+            How to pin programs to taskbar with powershell in Windows 10 or Windows Server 2012+ &middot; Joel Murphy
         
     </title>
 
@@ -51,7 +51,7 @@
 
     <meta content="Joel Murphy" property="og:site_name">
 
-<meta content="Why I ditched wordpress for Jekyll" property="og:title">
+<meta content="How to pin programs to taskbar with powershell in Windows 10 or Windows Server 2012+" property="og:title">
 
 
 
@@ -59,15 +59,15 @@
 
 
 
-<meta content="If you’ve been thinking of moving away from Wordpress and using a static website generator site then this is probably the post for you… In this post I will discuss my reasons for migrating my old Wordpress website to Jekyll. Wordpress is so stupidly bloated. I used to be a wordpress developer myself, but sometimes I asked myself ‘why’. Wordpress and it’s huge plugin system can be a handle to maintain. Don’t get me wrong,..." property="og:description">
+<meta content="Today I was looking for a solution to create a shortcut to Windows .exe files / Windows binaries / Windows Applications (whatever you want to call them). For future reference, here is a solution which works perfectly with Windows Server 2016 and Windows 10. All credits go to the original author for the starting point. I just made some simple amends and modified the script to take a list of arguments so multiple applications can..." property="og:description">
 
 
 
-<meta content="https://staging.joel-murphy.co.uk/blogposts/2018-05-10-why-i-ditched-wordpress-for-jekyll.html" property="og:url">
+<meta content="https://staging.joel-murphy.co.uk/blog/2019-5-5-windows-10-powershell-copy-app-to-taskbar.html" property="og:url">
 
 
 
-<meta content="2018-05-10T00:00:00+00:00" property="article:published_time">
+<meta content="2019-05-05T00:00:00+00:00" property="article:published_time">
 <meta content="https://staging.joel-murphy.co.uk/about/" property="article:author">
 
 
@@ -81,13 +81,13 @@
 
 
 
-<meta content="jekyll" property="article:tag">
+<meta content="windows" property="article:tag">
 
-<meta content="wordpress" property="article:tag">
+<meta content="pin" property="article:tag">
 
-<meta content="migration" property="article:tag">
+<meta content="taskbar" property="article:tag">
 
-<meta content="cms" property="article:tag">
+<meta content="powershell" property="article:tag">
 
 
 </head>
@@ -358,7 +358,7 @@
                     <div class="d-flex align-items-center border border-left-0 border-right-0 py-2 mb-3">
     <div style="flex:1;flex-basis: 80%;">
         <h1 class="list-title">
-            Why I ditched wordpress for Jekyll
+            How to pin programs to taskbar with powershell in Windows 10 or Windows Server 2012+
         </h1>
     </div>
 
@@ -411,7 +411,7 @@
     
     
     <li class="breadcrumb-item active">
-        <a href="/blogposts/2018-05-10-why-i-ditched-wordpress-for-jekyll.html">Why I ditched wordpress for Jekyll</a>
+        <a href="/blog/2019-5-5-windows-10-powershell-copy-app-to-taskbar.html">How to pin programs to taskbar with powershell in Windows 10 or Windows Server 2012+</a>
     </li>
 </nav>
 
@@ -425,69 +425,99 @@
         <i class="fas fa-clock fa-xs" style="color: #553e98;"></i>
         
         
-        3 minutes
+        5 minutes
         
         read
     </span>
     </div>
     <div class="crumb-item">
-        <span><i class="fas fa-calendar fa-xs" style="color: #553e98;"></i> <date>10 May 2018</date></span>
+        <span><i class="fas fa-calendar fa-xs" style="color: #553e98;"></i> <date>05 May 2019</date></span>
     </div>
 </aside>
 
 
 <hr>
 
-<p>If you’ve been thinking of moving away from Wordpress and using a static website generator site then this is probably the post for you… In this post I will discuss my reasons for migrating my old Wordpress website to Jekyll.</p>
+<p>Today I was looking for a solution to create a shortcut to Windows .exe files / Windows binaries / Windows Applications (whatever you want to call them). For future reference, here is a solution which works perfectly with Windows Server 2016 and Windows 10. All credits go to the original author for the starting point. I just made some simple amends and modified the script to take a list of arguments so multiple applications can be added to the Windows Taskbar at the same time.</p>
+
+<p>This solution can be used with configuration management and provisioning tools. All you have to do is supply a list of applications to be pinned and invoke a powershell script. Awesome!</p>
 
 <!--more-->
 
-<p>Wordpress is so stupidly bloated.
-I used to be a wordpress developer myself, but sometimes I asked myself ‘why’.</p>
+<figure class="highlight"><pre><code class="language-powershell" data-lang="powershell"><span class="c"># Function Credit: https://community.spiceworks.com/topic/2165665-pinning-taskbar-items-with-powershell-script</span><span class="w">
+</span><span class="kr">Function</span><span class="w"> </span><span class="nf">Set-PinTaskbar</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="kr">Param</span><span class="w"> </span><span class="p">(</span><span class="w">
+        </span><span class="p">[</span><span class="kt">parameter</span><span class="p">(</span><span class="kt">Mandatory</span><span class="o">=</span><span class="nv">$True</span><span class="p">,</span><span class="w"> </span><span class="kt">HelpMessage</span><span class="o">=</span><span class="s2">"Target item to pin"</span><span class="p">)]</span><span class="w">
+        </span><span class="p">[</span><span class="kt">ValidateNotNullOrEmpty</span><span class="p">()]</span><span class="w">
+        </span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="w"> </span><span class="nv">$Target</span><span class="w">
+        </span><span class="p">,</span><span class="w">
+        </span><span class="p">[</span><span class="kt">Parameter</span><span class="p">(</span><span class="kt">Mandatory</span><span class="o">=</span><span class="nv">$False</span><span class="p">,</span><span class="w"> </span><span class="kt">HelpMessage</span><span class="o">=</span><span class="s2">"Target item to unpin"</span><span class="p">)]</span><span class="w">
+        </span><span class="p">[</span><span class="kt">switch</span><span class="p">]</span><span class="nv">$Unpin</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+    </span><span class="kr">If</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nf">Test-Path</span><span class="w"> </span><span class="nv">$Target</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nf">Write-Warning</span><span class="w"> </span><span class="s2">"</span><span class="nv">$Target</span><span class="s2"> does not exist"</span><span class="w">
+        </span><span class="kr">Break</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 
-<p>Wordpress and it’s huge plugin system can be a handle to maintain. Don’t get me wrong, it’s amazing that there are so many plugins actively developed for Wordpress but w</p>
+    </span><span class="nv">$KeyPath1</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">"HKLM:\SOFTWARE\Classes"</span><span class="w">
+    </span><span class="nv">$KeyPath2</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+    </span><span class="nv">$KeyPath3</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">"shell"</span><span class="w">
+    </span><span class="nv">$KeyPath4</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">"{:}"</span><span class="w">
+    </span><span class="nv">$ValueName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ExplorerCommandHandler"</span><span class="w">
+    </span><span class="nv">$ValueData</span><span class="w"> </span><span class="o">=</span><span class="w">
+        </span><span class="p">(</span><span class="nf">Get-ItemProperty</span><span class="w"> </span><span class="err">`</span><span class="w">
+            </span><span class="p">(</span><span class="s2">"HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="err">`</span><span class="w">
+                </span><span class="s2">"CommandStore\shell\Windows.taskbarpin"</span><span class="p">)</span><span class="w">
+        </span><span class="p">)</span><span class="o">.</span><span class="nf">ExplorerCommandHandler</span><span class="w">
 
-<p>Sometimes websites can have in excess of 10, 20, 50, to 100+ plugins installed. All it takes is for one of those plugins to have one single security vulnrebility and this is enough to comepletely take down your website. Some wordpress security vulnerabilities can go unseen for months, or even years. What if a plugin developer decides to abandon their masterpiece of a plugin if they’ve taken on other projects? You’re pretty much screwed and the only option you’re left with is to fork and maintain a version of the plugin yourself, or use an alternative plugin. The issues with this is it can take up a lot of time</p>
+    </span><span class="nv">$Key2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nf">Get-Item</span><span class="w"> </span><span class="nv">$KeyPath1</span><span class="p">)</span><span class="o">.</span><span class="nf">OpenSubKey</span><span class="p">(</span><span class="nv">$KeyPath2</span><span class="p">,</span><span class="w"> </span><span class="bp">$true</span><span class="p">)</span><span class="w">
+    </span><span class="nv">$Key3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$Key2</span><span class="o">.</span><span class="nf">CreateSubKey</span><span class="p">(</span><span class="nv">$KeyPath3</span><span class="p">,</span><span class="w"> </span><span class="bp">$true</span><span class="p">)</span><span class="w">
+    </span><span class="nv">$Key4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$Key3</span><span class="o">.</span><span class="nf">CreateSubKey</span><span class="p">(</span><span class="nv">$KeyPath4</span><span class="p">,</span><span class="w"> </span><span class="bp">$true</span><span class="p">)</span><span class="w">
+    </span><span class="nv">$Key4</span><span class="o">.</span><span class="nf">SetValue</span><span class="p">(</span><span class="nv">$ValueName</span><span class="p">,</span><span class="w"> </span><span class="nv">$ValueData</span><span class="p">)</span><span class="w">
 
-<!--more-->
+    </span><span class="nv">$Shell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">New-Object</span><span class="w"> </span><span class="nt">-ComObject</span><span class="w"> </span><span class="s2">"Shell.Application"</span><span class="w">
+    </span><span class="nv">$Folder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$Shell</span><span class="o">.</span><span class="nf">Namespace</span><span class="p">((</span><span class="nf">Get-Item</span><span class="w"> </span><span class="nv">$Target</span><span class="p">)</span><span class="o">.</span><span class="nf">DirectoryName</span><span class="p">)</span><span class="w">
+    </span><span class="nv">$Item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$Folder</span><span class="o">.</span><span class="nf">ParseName</span><span class="p">((</span><span class="nf">Get-Item</span><span class="w"> </span><span class="nv">$Target</span><span class="p">)</span><span class="o">.</span><span class="nf">Name</span><span class="p">)</span><span class="w">
 
-<p>Now my website is completely managed with git. This is absolutely fantastic. In a matter of minutes and from pretty much any device I can make changes to my website and github pages will automatically deploy those changes for me when pushed to a specificied branch. How cool this this?</p>
+    </span><span class="c"># Registry key where the pinned items are located</span><span class="w">
+    </span><span class="nv">$RegistryKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband"</span><span class="w">
+    </span><span class="c"># Binary registry value where the pinned items are located</span><span class="w">
+    </span><span class="nv">$RegistryValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"FavoritesResolve"</span><span class="w">
+    </span><span class="c"># Gets the contents into an ASCII format</span><span class="w">
+    </span><span class="nv">$CurrentPinsProperty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">([</span><span class="no">system.text.</span><span class="kt">encoding</span><span class="p">]::</span><span class="nf">ASCII.GetString</span><span class="p">((</span><span class="nf">Get-ItemProperty</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="nv">$RegistryKey</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="nv">$RegistryValue</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">Select-Object</span><span class="w"> </span><span class="nt">-ExpandProperty</span><span class="w"> </span><span class="nv">$RegistryValue</span><span class="p">)))</span><span class="w">
+    </span><span class="c"># Specifies the wildcard of the current executable to be pinned, so that it won't attempt to unpin / repin</span><span class="w">
+    </span><span class="nv">$Executable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"*"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nf">Split-Path</span><span class="w"> </span><span class="nv">$Target</span><span class="w"> </span><span class="nt">-Leaf</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+    </span><span class="c"># Filters the results for only the characters that we are looking for, so that the search will function</span><span class="w">
+    </span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nv">$CurrentPinsResults</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$CurrentPinsProperty</span><span class="w"> </span><span class="o">-Replace</span><span class="w"> </span><span class="s1">'[^\x20-\x2f^\x30-\x39\x41-\x5A\x61-\x7F]+'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="w">
 
-<p>Just like any other page on the internet, HTML is used to write the structure and content of webpages. However, Jekyll has support for rendering content using Markdwon. This is a nice little extra as it allows you to do things such as writing lists much faster than before. E.g. why write 20 lines of HTML when you can achieve the same thing in 4?</p>
+    </span><span class="c"># Unpin if the application is pinned</span><span class="w">
+    </span><span class="kr">If</span><span class="w"> </span><span class="p">(</span><span class="nv">$Unpin</span><span class="o">.</span><span class="nf">IsPresent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="kr">If</span><span class="w"> </span><span class="p">(</span><span class="nv">$CurrentPinsResults</span><span class="w"> </span><span class="o">-like</span><span class="w"> </span><span class="nv">$Executable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nv">$Item</span><span class="o">.</span><span class="nf">InvokeVerb</span><span class="p">(</span><span class="s2">"{:}"</span><span class="p">)</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    </span><span class="kr">Else</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="c"># Only pin the application if it hasn't been pinned</span><span class="w">
+        </span><span class="kr">If</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nv">$CurrentPinsResults</span><span class="w"> </span><span class="o">-like</span><span class="w"> </span><span class="nv">$Executable</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nv">$Item</span><span class="o">.</span><span class="nf">InvokeVerb</span><span class="p">(</span><span class="s2">"{:}"</span><span class="p">)</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+    
+    </span><span class="nv">$Key3</span><span class="o">.</span><span class="nf">DeleteSubKey</span><span class="p">(</span><span class="nv">$KeyPath4</span><span class="p">)</span><span class="w">
+    </span><span class="kr">If</span><span class="w"> </span><span class="p">(</span><span class="nv">$Key3</span><span class="o">.</span><span class="nf">SubKeyCount</span><span class="w"> </span><span class="o">-eq</span><span class="w"> </span><span class="nx">0</span><span class="w"> </span><span class="o">-and</span><span class="w"> </span><span class="nv">$Key3</span><span class="o">.</span><span class="nf">ValueCount</span><span class="w"> </span><span class="o">-eq</span><span class="w"> </span><span class="nx">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nv">$Key2</span><span class="o">.</span><span class="nf">DeleteSubKey</span><span class="p">(</span><span class="nv">$KeyPath3</span><span class="p">)</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
-<ul>
-  <li>Point 1</li>
-  <li>Point 2</li>
-  <li>Point 3</li>
-</ul>
-
-<ul>
-    <li>
-        Point 1
-    </li>
-    <li>
-        Point 2
-    </li>
-    <li>
-        Point 3
-    </li>
-</ul>
-
-<p>What’s even cooler about markdown is that it can be combined with HTML in Jekyll so you have the best of both worlds for typing up webpage markup and content.</p>
-
-<p>You can customise a lot more than you think, just by using pre-html renderers and configuration defined in a YAML file.</p>
-
-<p>Static websites are a lot faster</p>
-
-<p>There’s no need for maintaining a database
-This point kind of goes hand-in-hand as being a positive and a negative when developing websites. Managing a database has become pretty easy nowadays thanks to the numerous amount of backup scripts and dozens of storage providers available to us. But why even bother managing a database unless you have to? By having a static website you can focus</p>
+</span><span class="c">#Set-PinTaskbar("C:\windows\system32\notepad.exe");</span><span class="w">
+</span><span class="c">#Set-PinTaskbar("C:\windows\system32\calc.exe");</span></code></pre></figure>
 
 
 <div class="space-before" style="z-index: 0 !important;margin-top:10px;">
     <div class="card bg-white mb-3">
         <div class="card-body">
             <div class="card-title">
-                Posted on <date>10 May 2018</date> by Joel Murphy. Last updated: <date>September 30, 2019</date>.
+                Posted on <date>05 May 2019</date> by Joel Murphy. Last updated: <date>September 08, 2019</date>.
             </div>
             <div class="d-flex flex-wrap align-items-center">
                 <span class="icon grey mr-2 mb-2">
@@ -507,24 +537,24 @@ This point kind of goes hand-in-hand as being a positive and a negative when dev
 
                 </span>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/jekyll/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/windows/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        jekyll
+                        windows
                     </a>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/wordpress/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/pin/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        wordpress
+                        pin
                     </a>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/migration/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/taskbar/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        migration
+                        taskbar
                     </a>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/cms/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/powershell/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        cms
+                        powershell
                     </a>
                 
             </div>
@@ -535,10 +565,10 @@ This point kind of goes hand-in-hand as being a positive and a negative when dev
 
 <div class="PageNavigation">
     
-    <a class="prev" href="/blogposts/2018-05-10-three-years-of-computer-science-summary.html">&laquo; Three years of computer science in a day</a>
+    <a class="prev" href="/blog/2019-04-11-vs-code-export-plugins-list-on-windows-unix.html">&laquo; How to export Visual Studio Code Plugins list</a>
     
     
-    <a class="next" href="/blogposts/2018-10-10-understanding-the-core-concepts-of-kubernetes.html">Understanding the core concepts of Kubernetes &raquo;</a>
+    <a class="next" href="/blog/2019-05-10-technology-topics-with-learning-in-2019.html">Technology topics worth learning in 2019 &raquo;</a>
     
 </div>
 
@@ -550,7 +580,7 @@ This point kind of goes hand-in-hand as being a positive and a negative when dev
             <h3>Table of Contents:</h3>
             
             <ul>
-  <li><a href="#">Why I ditched wordpress for Jekyll</a></li>
+  <li><a href="#">How to pin programs to taskbar with powershell in Windows 10 or Windows Server 2012+</a></li>
 </ul>
         
 
@@ -575,43 +605,43 @@ This point kind of goes hand-in-hand as being a positive and a negative when dev
     <h4>Share this Blog Post:</h4>
 
     <div class="share-buttons">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://staging.joel-murphy.co.uk/blogposts/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://staging.joel-murphy.co.uk/blog/2019-5-5-windows-10-powershell-copy-app-to-taskbar.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button facebook"
            title="Share on Facebook">
             <i class="fab fa-facebook"> </i> facebook
         </a>
-        <a href="https://twitter.com/intent/tweet?text=Why I ditched wordpress for Jekyll&url=https://staging.joel-murphy.co.uk/blogposts/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
+        <a href="https://twitter.com/intent/tweet?text=How to pin programs to taskbar with powershell in Windows 10 or Windows Server 2012+&url=https://staging.joel-murphy.co.uk/blog/2019-5-5-windows-10-powershell-copy-app-to-taskbar.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button twitter"
            title="Share on Twitter">
             <i class="fab fa-twitter"> </i> twitter
         </a>
-        <a href="https://www.pinterest.com/pin/create/button/?url=https://staging.joel-murphy.co.uk/blogposts/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
+        <a href="https://www.pinterest.com/pin/create/button/?url=https://staging.joel-murphy.co.uk/blog/2019-5-5-windows-10-powershell-copy-app-to-taskbar.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button pinterest"
            title="Share on Pinterest">
             <i class="fab fa-pinterest-p"> </i> pinterest
         </a>
-        <a href="https://www.tumblr.com/share/link?url=https://staging.joel-murphy.co.uk/blogposts/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
+        <a href="https://www.tumblr.com/share/link?url=https://staging.joel-murphy.co.uk/blog/2019-5-5-windows-10-powershell-copy-app-to-taskbar.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button tumblr"
            title="Share on Tumblr">
             <i class="fab fa-tumblr"> </i> tumblr
         </a>
-        <a href="http://www.reddit.com/submit?url=https://staging.joel-murphy.co.uk/blogposts/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
+        <a href="http://www.reddit.com/submit?url=https://staging.joel-murphy.co.uk/blog/2019-5-5-windows-10-powershell-copy-app-to-taskbar.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button reddit"
            title="Share on Reddit">
             <i class="fab fa-reddit"> </i> reddit
         </a>
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://staging.joel-murphy.co.uk/blogposts/2018-05-10-why-i-ditched-wordpress-for-jekyll.html&title=Why I ditched wordpress for Jekyll&summary=&source=Joel Murphy"
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://staging.joel-murphy.co.uk/blog/2019-5-5-windows-10-powershell-copy-app-to-taskbar.html&title=How to pin programs to taskbar with powershell in Windows 10 or Windows Server 2012+&summary=&source=Joel Murphy"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button linkedin"
            title="Share on LinkedIn">
             <i class="fab fa-linkedin"> </i> linkedin
         </a>
-        <a href="mailto:?subject=Why I ditched wordpress for Jekyll&amp;body=Check%20out%20this%20site:%20https://staging.joel-murphy.co.uk/blogposts/2018-05-10-why-i-ditched-wordpress-for-jekyll.html"
+        <a href="mailto:?subject=How to pin programs to taskbar with powershell in Windows 10 or Windows Server 2012+&amp;body=Check%20out%20this%20site:%20https://staging.joel-murphy.co.uk/blog/2019-5-5-windows-10-powershell-copy-app-to-taskbar.html"
            class="share-button email"
            title="Share via Email">
             <i class="far fa-envelope"> </i> email
@@ -621,7 +651,7 @@ This point kind of goes hand-in-hand as being a positive and a negative when dev
 
 <hr>
 
-<h4 class="comment-heading">Share your thoughts on: 'Why I ditched wordpress for Jekyll':</h4>
+<h4 class="comment-heading">Share your thoughts on: 'How to pin programs to taskbar with powershell in Windows 10 or Windows Server 2012+':</h4>
 
 
 <div id="disqus_thread"></div>
@@ -648,19 +678,19 @@ This point kind of goes hand-in-hand as being a positive and a negative when dev
                 <p>There's plenty more content to explore:</p>
                 <ul class="list-inline">
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Blog Posts</a>
+                        <a href="/blog/">Blog Posts</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Tutorials</a>
+                        <a href="/tutorials/">Tutorials</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Portfolio Items</a>
+                        <a href="/portfolio/">Portfolio Items</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Money Saving Guides</a>
+                        <a href="/money-saving/">Money Saving Guides</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Product Reviews</a>
+                        <a href="/product-reviews/">Product Reviews</a>
                     </li>
                 </ul>
             </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Sample code demonstrating how to loop over any collection type in Jekyll">
+    <meta name="description" content="">
     <meta name="author" content="Joel Murphy">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png"/>
@@ -24,7 +24,7 @@
 
     <title>
         
-            Snapchat QR codes / snapcodes API? &middot; Joel Murphy
+            Organising backups in a monthly folder structure with Powershell &middot; Joel Murphy
         
     </title>
 
@@ -51,7 +51,7 @@
 
     <meta content="Joel Murphy" property="og:site_name">
 
-<meta content="Snapchat QR codes / snapcodes API?" property="og:title">
+<meta content="Organising backups in a monthly folder structure with Powershell" property="og:title">
 
 
 
@@ -59,15 +59,32 @@
 
 
 
-<meta content="Sample code demonstrating how to loop over any collection type in Jekyll" property="og:description">
+<meta content="Today I want to share a super handy Powershell snippet for creating monthly archives
 
 
 
-<meta content="https://staging.joel-murphy.co.uk/blogposts/2015-05-25-snapchat-qr-codes-snapcodes-api.html" property="og:url">
+$LogArchiveDirectory = "C:\logs\unorganised"
+
+get-childitem | % {
+
+    $file = $_.FullName
+    $date = Get-Date ($_.LastWriteTime)
+    $month = $date.month
+    $year = $date.year
+
+    new-item -type Directory -path "$LogArchiveDirectory\$year\$month" -Force
+    move-item $file "$LogArchiveDirectory\$year\$month"
+}
+
+" property="og:description">
 
 
 
-<meta content="2015-05-25T00:00:00+00:00" property="article:published_time">
+<meta content="https://staging.joel-murphy.co.uk/blog/2019-03-03-powershell-monthly-backup-archive.html" property="og:url">
+
+
+
+<meta content="2019-03-03T00:00:00+00:00" property="article:published_time">
 <meta content="https://staging.joel-murphy.co.uk/about/" property="article:author">
 
 
@@ -81,11 +98,15 @@
 
 
 
-<meta content="beards" property="article:tag">
+<meta content="powershell" property="article:tag">
 
-<meta content="internet" property="article:tag">
+<meta content="organised" property="article:tag">
 
-<meta content="prank" property="article:tag">
+<meta content="backups" property="article:tag">
+
+<meta content="monthly" property="article:tag">
+
+<meta content="archive" property="article:tag">
 
 
 </head>
@@ -356,7 +377,7 @@
                     <div class="d-flex align-items-center border border-left-0 border-right-0 py-2 mb-3">
     <div style="flex:1;flex-basis: 80%;">
         <h1 class="list-title">
-            Snapchat QR codes / snapcodes API?
+            Organising backups in a monthly folder structure with Powershell
         </h1>
     </div>
 
@@ -409,7 +430,7 @@
     
     
     <li class="breadcrumb-item active">
-        <a href="/blogposts/2015-05-25-snapchat-qr-codes-snapcodes-api.html">Snapchat QR codes / snapcodes API?</a>
+        <a href="/blog/2019-03-03-powershell-monthly-backup-archive.html">Organising backups in a monthly folder structure with Powershell</a>
     </li>
 </nav>
 
@@ -423,63 +444,43 @@
         <i class="fas fa-clock fa-xs" style="color: #553e98;"></i>
         
         
-        5 minutes
+        1 minute
         
         read
     </span>
     </div>
     <div class="crumb-item">
-        <span><i class="fas fa-calendar fa-xs" style="color: #553e98;"></i> <date>25 May 2015</date></span>
+        <span><i class="fas fa-calendar fa-xs" style="color: #553e98;"></i> <date>03 Mar 2019</date></span>
     </div>
 </aside>
 
 
 <hr>
 
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Archived Post:</strong> This post has been marked as 'archived' and only exists for historical purposes. As a result of this, some information in this post may be outdated or no longer supported.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-<div class="entry-content">
-		<div class="getsocial gs-inline-group"></div>
-<p><br /><img src="http://localhost:81/wordpress/wp-content/uploads/2015/05/Screen-Shot-2015-05-25-at-16.36.11.png" alt="Screen Shot 2015-05-25 at 16.36.11" class="img-fluid" /></p>
-<p>So recently I’ve been&nbsp;working on a website where one of the requirements is that it&nbsp;must have a strong connection with&nbsp;the brand’s social media presence. This means that a user coming to the website must be able to explore and interact with the brand’s social media content without having to leave the current page.</p>
-<p>I’ve currently implemented the <a href="https://instagram.com/developer/embedding/">Instagram image embed widget</a>&nbsp;to interact with individual posts, made use of the <a href="https://developers.facebook.com/docs/graph-api">Facebook Graph API to get information about a page</a>, looked at <a href="https://developers.facebook.com/docs/plugins">Facebook’s embeddable plugins</a>&nbsp;for Facebook page interactions, and explored&nbsp;<a href="https://developers.google.com/+/web/badge/">Google’s embeddable badges</a>&nbsp;for interacting with Google Plus entities. But one major social media service appears&nbsp;to be missing – Snapchat.</p>
-<p><span id="more-289"></span></p>
-<p>Now although Snapchat is a social media for mobile devices only, it is still dominating the market with over 100 million active users. 400 million snaps are sent daily through the service, and 71% of its users are&nbsp;under 25 – making it essential for reaching out to the average teenager by marketers (as seen in the&nbsp;following slideshare presentation):</p>
-<p><iframe style="border: 1px solid rgb(204, 204, 204); margin-bottom: 5px; max-width: 100%; width: 517px; height: 432px;" src="//www.slideshare.net/slideshow/embed_code/key/KvSpB9DJQ4V0pA" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen="allowfullscreen"> </iframe></p>
-<div style="margin-bottom: 5px;"><strong> <a title="6 Snapchat Hacks Too Easy To Ignore" href="//www.slideshare.net/vaynerchuk/6-snapchat-hacks-too-easy-to-ignore" target="_blank">6 Snapchat Hacks Too Easy To Ignore</a> </strong> from <strong><a href="//www.slideshare.net/vaynerchuk" target="_blank">Gary Vaynerchuk</a></strong></div>
-<div style="margin-bottom: 5px;"></div>
+<p>Today I want to share a super handy Powershell snippet for creating monthly archives</p>
 
 <!--more-->
 
-<p>But&nbsp;what does this mean for webmasters? Should we simply ignore any social interaction with Snapchat as there isn’t an official Snapchat API available? Before, the answer to this would have been <strong>Yes!</strong>&nbsp;But now the answer to this is N<strong>o</strong>!</p>
-<p>A few months ago, Snapchat added a new feature to its mobile apps where users could add friends by scanning their unique ‘SnapCode’. A SnapCode is essentially snapchat’s own implementation&nbsp;of the QR code specification. You can see an example SnapCode in the screenshot below:</p>
-<p><img class="aligncenter wp-image-295 size-medium" src="http://localhost:81/wordpress/wp-content/uploads/2015/05/image-169x300.jpg" alt="image" width="169" height="300" /></p>
-<p>If you scan this SnapCode, a friend request will be sent to my personal snapchat account. This could potentially save&nbsp;users from having to manually search for my username using the app.</p>
-<p>So how could this be implemented on a website? Well, all you’d need to do is include an image of your&nbsp;SnapCode inside it within your webpage. Sure, you could go ahead and do this manually by taking a screenshot of your SnapCode&nbsp;in the Snapchat app&nbsp;like I have above, but this isn’t really ideal if you want a higher resolution image. This is why&nbsp;Snapchat have now simplified this process by creating <a href="https://accounts.snapchat.com/accounts/snapcodes">a website dedicated to generating SnapChat QR codes, or SnapCodes</a>.</p>
-<p>Snapchat’s new website&nbsp;is far from being an API to be able to generate a SnapCode QR codes for any user just yet, but you can freely&nbsp;<a href="https://accounts.snapchat.com/accounts/snapcodes?type=packaged">download your own SnapCode&nbsp;from SnapChat’s new SnapCode website</a>.</p>
-<p>After downloading your SnapCode, you’ll&nbsp;have a zipped&nbsp;file which contains PNG and SVG versions of your Snapcode. You are then able to make&nbsp;customisations to your own SnapCode, but be sure to&nbsp;follow SnapChat’s&nbsp;guidelines and best practices for modifying the image containing the SnapCode. This is to ensure that the tag still works properly before it is printed or embedded on a website or anywhere else. There will be a PDF specification document inside the zipped folder which can help you with this.</p>
-<p>Here’s an example of a SnapCode I edited earlier:</p>
-<p>Original SnapCode:</p>
-<p><img class="aligncenter wp-image-302 size-thumbnail" src="http://localhost:81/wordpress/wp-content/uploads/2015/05/snapcode-150x150.png" alt="snapcode" width="150" height="150" /></p>
-<p>&nbsp;</p>
-<p>Edited SnapCode:</p>
-<p><img class="aligncenter wp-image-308 size-thumbnail" src="http://localhost:81/wordpress/wp-content/uploads/2015/05/snapcode1-150x150.png" alt="snapcode" width="150" height="150" /></p>
-<p>As you can see, I have added my own content inside the Ghost of the Snapchat icon and my unique SnapCode data is still intact inside the image. This could&nbsp;be used for putting your own brand inside the image so users of your service can identify that you exist on Snapchat and add you as a friend if they wish.</p>
-<p>This is just one of the ways snapchat has started to expand to reach out to new users. I’m sure the Snapchat team will&nbsp;be adding plenty&nbsp;more features like this in the future, and an official Snapchat API may soon become available. But for now, we’ll have to sit back and play the waiting game for&nbsp;anything more to be announced.</p>
-<p>I hope this post has inspired you to start including Snapchat as a social media on your own websites / posters / videos or whatever you’re creating. I’m sure we’ll start seeing stickers put up in shop windows soon enough if this really catches on!</p>
-			</div>
+<figure class="highlight"><pre><code class="language-powershell" data-lang="powershell"><span class="nv">$LogArchiveDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:\logs\unorganised"</span><span class="w">
+
+</span><span class="nf">get-childitem</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">{</span><span class="w">
+
+    </span><span class="nv">$file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">$_</span><span class="o">.</span><span class="nf">FullName</span><span class="w">
+    </span><span class="nv">$date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Get-Date</span><span class="w"> </span><span class="p">(</span><span class="bp">$_</span><span class="o">.</span><span class="nf">LastWriteTime</span><span class="p">)</span><span class="w">
+    </span><span class="nv">$month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$date</span><span class="o">.</span><span class="nf">month</span><span class="w">
+    </span><span class="nv">$year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$date</span><span class="o">.</span><span class="nf">year</span><span class="w">
+
+    </span><span class="nf">new-item</span><span class="w"> </span><span class="nt">-type</span><span class="w"> </span><span class="nx">Directory</span><span class="w"> </span><span class="nt">-path</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LogArchiveDirectory</span><span class="s2">\</span><span class="nv">$year</span><span class="s2">\</span><span class="nv">$month</span><span class="s2">"</span><span class="w"> </span><span class="nt">-Force</span><span class="w">
+    </span><span class="nf">move-item</span><span class="w"> </span><span class="nv">$file</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LogArchiveDirectory</span><span class="s2">\</span><span class="nv">$year</span><span class="s2">\</span><span class="nv">$month</span><span class="s2">"</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
 
 
 <div class="space-before" style="z-index: 0 !important;margin-top:10px;">
     <div class="card bg-white mb-3">
         <div class="card-body">
             <div class="card-title">
-                Posted on <date>25 May 2015</date> by Joel Murphy. Last updated: <date>October 15, 2019</date>.
+                Posted on <date>03 Mar 2019</date> by Joel Murphy. Last updated: <date>September 08, 2019</date>.
             </div>
             <div class="d-flex flex-wrap align-items-center">
                 <span class="icon grey mr-2 mb-2">
@@ -499,19 +500,29 @@
 
                 </span>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/beards/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/powershell/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        beards
+                        powershell
                     </a>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/internet/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/organised/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        internet
+                        organised
                     </a>
                 
-                    <a href="https://staging.joel-murphy.co.uk/tag/prank/"
+                    <a href="https://staging.joel-murphy.co.uk/tag/backups/"
                        class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
-                        prank
+                        backups
+                    </a>
+                
+                    <a href="https://staging.joel-murphy.co.uk/tag/monthly/"
+                       class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
+                        monthly
+                    </a>
+                
+                    <a href="https://staging.joel-murphy.co.uk/tag/archive/"
+                       class="bg-white border rounded p-1 mr-2 mb-2 d-inline-block">
+                        archive
                     </a>
                 
             </div>
@@ -522,10 +533,10 @@
 
 <div class="PageNavigation">
     
-    <a class="prev" href="/blogposts/2015-04-26-make-the-internet-funny-with-beards.html">&laquo; How to make the internet a funnier place by adding beards to all images (Joke Post)</a>
+    <a class="prev" href="/blog/2019-02-11-why-facebook-has-smashed-open-source.html">&laquo; Why Facebook has smashed Open Source and other tech companies should be following their lead</a>
     
     
-    <a class="next" href="/blogposts/2018-03-10-looping-over-all-collections-in-jekyll.html">How to loop over any collection type in Jekyll &raquo;</a>
+    <a class="next" href="/blog/2019-04-11-vs-code-export-plugins-list-on-windows-unix.html">How to export Visual Studio Code Plugins list &raquo;</a>
     
 </div>
 
@@ -537,7 +548,7 @@
             <h3>Table of Contents:</h3>
             
             <ul>
-  <li><a href="#">Snapchat QR codes / snapcodes API?</a></li>
+  <li><a href="#">Organising backups in a monthly folder structure with Powershell</a></li>
 </ul>
         
 
@@ -562,43 +573,43 @@
     <h4>Share this Blog Post:</h4>
 
     <div class="share-buttons">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://staging.joel-murphy.co.uk/blogposts/2015-05-25-snapchat-qr-codes-snapcodes-api.html"
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://staging.joel-murphy.co.uk/blog/2019-03-03-powershell-monthly-backup-archive.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button facebook"
            title="Share on Facebook">
             <i class="fab fa-facebook"> </i> facebook
         </a>
-        <a href="https://twitter.com/intent/tweet?text=Snapchat QR codes / snapcodes API?&url=https://staging.joel-murphy.co.uk/blogposts/2015-05-25-snapchat-qr-codes-snapcodes-api.html"
+        <a href="https://twitter.com/intent/tweet?text=Organising backups in a monthly folder structure with Powershell&url=https://staging.joel-murphy.co.uk/blog/2019-03-03-powershell-monthly-backup-archive.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button twitter"
            title="Share on Twitter">
             <i class="fab fa-twitter"> </i> twitter
         </a>
-        <a href="https://www.pinterest.com/pin/create/button/?url=https://staging.joel-murphy.co.uk/blogposts/2015-05-25-snapchat-qr-codes-snapcodes-api.html"
+        <a href="https://www.pinterest.com/pin/create/button/?url=https://staging.joel-murphy.co.uk/blog/2019-03-03-powershell-monthly-backup-archive.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button pinterest"
            title="Share on Pinterest">
             <i class="fab fa-pinterest-p"> </i> pinterest
         </a>
-        <a href="https://www.tumblr.com/share/link?url=https://staging.joel-murphy.co.uk/blogposts/2015-05-25-snapchat-qr-codes-snapcodes-api.html"
+        <a href="https://www.tumblr.com/share/link?url=https://staging.joel-murphy.co.uk/blog/2019-03-03-powershell-monthly-backup-archive.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button tumblr"
            title="Share on Tumblr">
             <i class="fab fa-tumblr"> </i> tumblr
         </a>
-        <a href="http://www.reddit.com/submit?url=https://staging.joel-murphy.co.uk/blogposts/2015-05-25-snapchat-qr-codes-snapcodes-api.html"
+        <a href="http://www.reddit.com/submit?url=https://staging.joel-murphy.co.uk/blog/2019-03-03-powershell-monthly-backup-archive.html"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button reddit"
            title="Share on Reddit">
             <i class="fab fa-reddit"> </i> reddit
         </a>
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://staging.joel-murphy.co.uk/blogposts/2015-05-25-snapchat-qr-codes-snapcodes-api.html&title=Snapchat QR codes / snapcodes API?&summary=Sample code demonstrating how to loop over any collection type in Jekyll&source=Joel Murphy"
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://staging.joel-murphy.co.uk/blog/2019-03-03-powershell-monthly-backup-archive.html&title=Organising backups in a monthly folder structure with Powershell&summary=&source=Joel Murphy"
            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
            class="share-button linkedin"
            title="Share on LinkedIn">
             <i class="fab fa-linkedin"> </i> linkedin
         </a>
-        <a href="mailto:?subject=Snapchat QR codes / snapcodes API?&amp;body=Check%20out%20this%20site:%20https://staging.joel-murphy.co.uk/blogposts/2015-05-25-snapchat-qr-codes-snapcodes-api.html"
+        <a href="mailto:?subject=Organising backups in a monthly folder structure with Powershell&amp;body=Check%20out%20this%20site:%20https://staging.joel-murphy.co.uk/blog/2019-03-03-powershell-monthly-backup-archive.html"
            class="share-button email"
            title="Share via Email">
             <i class="far fa-envelope"> </i> email
@@ -608,7 +619,7 @@
 
 <hr>
 
-<h4 class="comment-heading">Share your thoughts on: 'Snapchat QR codes / snapcodes API?':</h4>
+<h4 class="comment-heading">Share your thoughts on: 'Organising backups in a monthly folder structure with Powershell':</h4>
 
 
 <div id="disqus_thread"></div>
@@ -635,19 +646,19 @@
                 <p>There's plenty more content to explore:</p>
                 <ul class="list-inline">
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Blog Posts</a>
+                        <a href="/blog/">Blog Posts</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Tutorials</a>
+                        <a href="/tutorials/">Tutorials</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Portfolio Items</a>
+                        <a href="/portfolio/">Portfolio Items</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Money Saving Guides</a>
+                        <a href="/money-saving/">Money Saving Guides</a>
                     </li>
                     <li class="list-inline-item pill-link-item">
-                        <a href="">Product Reviews</a>
+                        <a href="/product-reviews/">Product Reviews</a>
                     </li>
                 </ul>
             </div>
